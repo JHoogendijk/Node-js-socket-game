@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script src='https://cdn.socket.io/socket.io-1.2.0.js'></script>
+        <script src='https://code.jquery.com/jquery-1.12.1.min.js'></script>
+        <script>
+            $(document).ready(function() {
+
+
+            var socket = io.connect('http://localhost:8000')
+            //event handler for incoming messages
+socket.on("message", function (data) {
+	alert(data);
+});
+
+//sending message
+$("#sendButton").click(function(){ //Don’t forget the Jquery library
+    socket.emit("message", "Hello World");
+});
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <input id='sendButton' type='button' value="klik">
+    </body>
+</html>
