@@ -1,0 +1,17 @@
+html {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
+            width: 100%;
+            background-color: deepskyblue;
+        }
+
+        #canvascontainer {}
+
+        canvas {
+            width: auto;
+            height: 100%;
+            background-color: deepskyblue;
+        }

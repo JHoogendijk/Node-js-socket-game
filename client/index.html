@@ -1,26 +1,79 @@
 <html>
-    <head>
-        <script src='https://cdn.socket.io/socket.io-1.2.0.js'></script>
-        <script src='https://code.jquery.com/jquery-1.12.1.min.js'></script>
-        <script>
-            $(document).ready(function() {
 
+<head>
+    <script src='https://cdn.socket.io/socket.io-1.2.0.js'></script>
+    <script src='https://code.jquery.com/jquery-1.12.1.min.js'></script>
+    <script>
+        $(document).ready(function () {
+            // Create the canvas
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            canvas.width = 512;
+            canvas.height = canvas.width / 16 * 9;
+            document.getElementById("canvascontainer").appendChild(canvas);
+
+            var castleOne = {
+                hp: 100,
+                ready: false,
+                , image: new Image()
+            }
+            castleOne.image.onload = function() {
+                castleOne.ready = true;
+            }
+
+            var castleTwo = {
+                hp: 100,
+                ready: false,
+                , image: new Image()
+            }
+            castleTwo.image.onload = function() {
+                castleTwo.ready = true;
+            }
+
+            function reset() {
+
+            }
+
+            var render = function () {
+                if (bgReady) {
+                    ctx.drawImage(bgImage, 0, 0);
+                }
+
+                if (heroReady) {
+                    ctx.drawImage(heroImage, hero.x, hero.y);
+                }
+
+                if (monsterReady) {
+                    ctx.drawImage(monsterImage, monster.x, monster.y);
+                }
+
+                // Score
+//                ctx.fillStyle = "rgb(250, 250, 250)";
+//                ctx.font = "24px Helvetica";
+//                ctx.textAlign = "left";
+//                ctx.textBaseline = "top";
+//                ctx.fillText("Monsterrs caught: " + monstersCaught, 32, 32);
+            };
 
             var socket = io.connect('http://localhost:8000')
-            //event handler for incoming messages
-socket.on("message", function (data) {
-	alert(data);
-});
-
-//sending message
-$("#sendButton").click(function(){ //Don’t forget the Jquery library
-    socket.emit("message", "Hello World");
-});
+                //event handler for incoming messages
+            socket.on("message", function (data) {
+                alert(data);
             });
-        </script>
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <input id='sendButton' type='button' value="klik">
-    </body>
+
+            //sending message
+            $("#sendButton").click(function () { //Don’t forget the Jquery library
+                socket.emit("message", "Hello World");
+            });
+        });
+    </script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+</body>
+<div id="canvascontainer">
+
+</div>
+
 </html>
